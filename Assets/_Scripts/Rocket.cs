@@ -6,13 +6,15 @@ public class Rocket : MonoBehaviour {
 
     private Rigidbody rigidBody;
     private AudioSource audioSource;
-    [SerializeField] private float mainthrust;
-    [SerializeField] private float rotSpeed;
+    private GameManager gameManager;
+    [SerializeField] private float mainthrust = 20f;
+    [SerializeField] private float rotSpeed = 20f;
 
     // Start is called before the first frame update
     void Start() {
         rigidBody = GetComponent<Rigidbody>();
         audioSource = GetComponent<AudioSource>();
+        gameManager = FindObjectOfType<GameManager>();
     }
 
     // Update is called once per frame
@@ -40,10 +42,12 @@ public class Rocket : MonoBehaviour {
             //Rest and do nothing
         } else if (tag == "Finish") {
             //Run level win outcome
+            gameManager.ChangeLevel();
             Debug.Log("A winrar is you");
         } else {
             //Colided with a baddie
             Debug.Log("Hit death");
+            gameManager.ChangeLevel("GameOver");
         }   
     }
 
