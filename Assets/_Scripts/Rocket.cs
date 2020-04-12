@@ -43,6 +43,7 @@ public class Rocket : MonoBehaviour {
             Debug.Log("A winrar is you");
         } else {
             //Colided with a baddie
+            Debug.Log("Hit death");
         }   
     }
 
