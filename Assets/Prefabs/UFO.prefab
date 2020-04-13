@@ -218,11 +218,11 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 9777f946f619b714a89b676e6a742e66, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.8
-  m_Pitch: -0.66
-  Loop: 1
+  m_Volume: 1
+  m_Pitch: 0.4
+  Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -334,6 +334,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainthrust: 750
   rotSpeed: 30
+  mainEngine: {fileID: 8300000, guid: 9777f946f619b714a89b676e6a742e66, type: 3}
+  objectCollision: {fileID: 8300000, guid: e981339a4c3319d4b9499242fd7b4051, type: 3}
+  successAudio: {fileID: 8300000, guid: b1d9cf1ea6f80754f82a62352272d22c, type: 3}
 --- !u!1 &5866857847771893979
 GameObject:
   m_ObjectHideFlags: 0

@@ -44,6 +44,9 @@ public class MainMenu : MonoBehaviour
     void SelectOption() {
         if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.KeypadEnter)) {
             if (menuOption == MenuOption.Start) {
+
+
+                gameManager.NewGame();
                 gameManager.ChangeLevel();
             } else if (menuOption == MenuOption.Quit) {
                 Debug.Log("Quitting");

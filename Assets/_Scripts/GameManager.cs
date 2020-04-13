@@ -1,16 +1,65 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+
+    public static GameManager instance;
+    public int lives = 3;
+    public float fuel = 200f;
+    public bool isEngineActive = true;
+
+    private int initialLives;
+    private float initialFuel;
+
+
     void Start(){
-        
+        initialLives = lives;
+        initialFuel = fuel;
+    }
+
+    //Singleton Pattern
+    void Awake() {
+        if (instance == null) {
+            instance = this;
+        } else if (instance != this) {
+            Destroy(gameObject);
+        }
+        DontDestroyOnLoad(gameObject);
+    }
+
+
+    public void NewGame() {
+        lives = initialLives;
+        fuel = initialFuel;
+        isEngineActive = true;
+    }
+
+    public void DestroyShip() {
+        if(lives > 0) {
+            lives--;
+            MoveLevel(SceneManager.GetActiveScene().buildIndex);
+        } else {
+            ChangeLevel("GameOver");
+        }
+    }
+
+    public void BurnFuel(float burn) {
+        fuel -= burn;
+        if (fuel < 0) {
+            fuel = 0;
+            isEngineActive = false;
+        }
+    }
+
+    public void AddFuel(float increase) {
+        fuel += increase;
     }
 
     public void ChangeLevel() {
-        Debug.Log("Change type 1");
         MoveLevel(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
@@ -22,7 +71,6 @@ public class GameManager : MonoBehaviour
         } else if (levelname == "GameOver") {
             MoveLevel(1);
         } else {
-            Debug.Log("Change type 2");
             MoveLevel(SceneManager.GetActiveScene().buildIndex + 1);
         }
     }
@@ -31,12 +79,12 @@ public class GameManager : MonoBehaviour
 
         Debug.Log("Loading level No: " + levelno);
 
-        if(levelno > SceneManager.sceneCountInBuildSettings || levelno < 0) {
+        if(levelno > SceneManager.sceneCountInBuildSettings-1 || levelno < 0) {
             Debug.LogError("Attempted to call non existant scene - Called: " + levelno + " Expected up to: " + SceneManager.sceneCountInBuildSettings);
             return;
         }
 
-        SceneManager.LoadScene(levelno);
+      SceneManager.LoadScene(levelno);
     }
 
 }
